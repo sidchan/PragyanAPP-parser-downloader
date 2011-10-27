@@ -22,8 +22,8 @@ public class ParsedExampleDataSet implements  List<ParsedExampleDataSet> {
 	public String getdescription() {
 		return description;
 	}
-	public void setdescription(String name) {
-		this.name = name;
+	public void setdescription(String description) {
+		this.description = description;
 	}
 	public String gettype() {
 		return type;
@@ -137,7 +137,7 @@ public class ParsedExampleDataSet implements  List<ParsedExampleDataSet> {
 	}
 	
 	public String toString(){
-		return "ExtractedString = " + this.name + " description " + this.description
+		return "ExtractedString = " + this.name + " Description " + this.description
 				+ "FileURL = " + this.fileurl;
 	}
 }

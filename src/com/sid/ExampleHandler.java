@@ -52,12 +52,12 @@ public class ExampleHandler extends DefaultHandler{
 			this.in_name = true;
 		}else if (localName.equals("imageurl")) {
 			this.in_photourl = true;
-		}else if (localName.equals("description")) {
+		}else if (localName.equals("des")) {
 			this.in_description = true;
 			// Extract an Attribute
-			String attrValue = atts.getValue("name");
+		//	String attrValue = atts.getValue("name");
 			//int i = Integer.parseInt(attrValue);
-			parsedExampleDataSet.setname(attrValue);
+		//	parsedExampleDataSet.setname(attrValue);
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class ExampleHandler extends DefaultHandler{
 			this.in_name = false;
 		}else if (localName.equals("imageurl")) {
 			this.in_photourl = false;
-		}else if (localName.equals("description")) {
+		}else if (localName.equals("des")) {
 			this.in_description = false;
 		}
 	}
@@ -88,7 +88,7 @@ public class ExampleHandler extends DefaultHandler{
     		parsedExampleDataSet.setdescription(new String(ch, start, length));
 	    	}
 		else if(this.in_name)
-		{ //parsedExampleDataSet.setname(new String(ch, start, length));
+		{ parsedExampleDataSet.setname(new String(ch, start, length));
     }
 		else if(this.in_type)
 		{   
