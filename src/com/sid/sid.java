@@ -39,7 +39,7 @@ public class sid extends Activity {
 
         try {
              /* Create a URL we want to load some xml-data from. */
-             URL url = new URL("http://www.anddev.org/images/tut/basic/parsingxml/example.xml");
+             URL url = new URL("http://www.pragyan.org/12/updates.xml");
 
              url.openConnection();
              /* Get a SAXParser from the SAXPArserFactory. */
@@ -57,10 +57,27 @@ public class sid extends Activity {
              /* Parsing has finished. */
 
              /* Our ExampleHandler now provides the parsed data to us. */
-              ParsedExampleDataSet parsedExampleDataSet = 
+            
+             List<ParsedExampleDataSet> parsedExampleDataSet = 
 					myExampleHandler.getParsedData();
-             FileURL= parsedExampleDataSet.getExtractedString();
-                 startDownload();
+           //  FileURL= (parsedExampleDataSet).getfileurl();
+            /* Iterator j;
+             j = parsedExampleDataSet.iterator();
+             ParsedExampleDataSet dataItem;
+             while(j.hasNext()){
+
+                  dataItem = (ParsedExampleDataSet) j.next();
+                  tv.append("\n" + dataItem.getname());
+                  tv.append("\n" + dataItem.gettype());
+                  tv.append("\n" + dataItem.getdescription());
+                  this.FileName = dataItem.getfileurl() + ".jpg";
+                  this.FileURL = dataItem.getfileurl();
+                  startDownload();
+                  }*/
+             tv.setText(parsedExampleDataSet.toString());
+
+             
+                
 
         } catch (Exception e) {
              /* Display any Error to the GUI. */

@@ -7,10 +7,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class ExampleHandler extends DefaultHandler{
 
-	
-	private boolean in_outertag = false;
-	private boolean in_innertag = false;
-	private boolean in_mytag = false;
+	private boolean in_pragyan=true;
+	private boolean in_type = false;
+	private boolean in_name = false;
+	private boolean in_photourl = false;
+	private boolean in_description=false;
 	
 	private ParsedExampleDataSet parsedExampleDataSet = new ParsedExampleDataSet();
 
@@ -42,17 +43,21 @@ public class ExampleHandler extends DefaultHandler{
 	@Override
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
-		if (localName.equals("outertag")) {
-			this.in_outertag = true;
-		}else if (localName.equals("innertag")) {
-			this.in_innertag = true;
-		}else if (localName.equals("mytag")) {
-			this.in_mytag = true;
-		}else if (localName.equals("tagwithnumber")) {
+		 if (localName.equals("pragyan")) {
+			this.in_pragyan = true;
+		}
+		else if (localName.equals("type")) {
+			this.in_type = true;
+		}else if (localName.equals("name")) {
+			this.in_name = true;
+		}else if (localName.equals("imageurl")) {
+			this.in_photourl = true;
+		}else if (localName.equals("description")) {
+			this.in_description = true;
 			// Extract an Attribute
-			String attrValue = atts.getValue("thenumber");
-			int i = Integer.parseInt(attrValue);
-			parsedExampleDataSet.setExtractedInt(i);
+			String attrValue = atts.getValue("name");
+			//int i = Integer.parseInt(attrValue);
+			parsedExampleDataSet.setname(attrValue);
 		}
 	}
 	
@@ -61,14 +66,17 @@ public class ExampleHandler extends DefaultHandler{
 	@Override
 	public void endElement(String namespaceURI, String localName, String qName)
 			throws SAXException {
-		if (localName.equals("outertag")) {
-			this.in_outertag = false;
-		}else if (localName.equals("innertag")) {
-			this.in_innertag = false;
-		}else if (localName.equals("mytag")) {
-			this.in_mytag = false;
-		}else if (localName.equals("tagwithnumber")) {
-			// Nothing to do here
+		 if (localName.equals("pragyan")) {
+				this.in_pragyan = true;
+			}
+		else if (localName.equals("type")) {
+			this.in_type = false;
+		}else if (localName.equals("name")) {
+			this.in_name = false;
+		}else if (localName.equals("imageurl")) {
+			this.in_photourl = false;
+		}else if (localName.equals("description")) {
+			this.in_description = false;
 		}
 	}
 	
@@ -76,8 +84,19 @@ public class ExampleHandler extends DefaultHandler{
 	 * <tag>characters</tag> */
 	@Override
     public void characters(char ch[], int start, int length) {
-		if(this.in_mytag){
-    		parsedExampleDataSet.setExtractedString(new String(ch, start, length));
-    	}
+		if(this.in_description){
+    		parsedExampleDataSet.setdescription(new String(ch, start, length));
+	    	}
+		else if(this.in_name)
+		{ //parsedExampleDataSet.setname(new String(ch, start, length));
     }
+		else if(this.in_type)
+		{   
+			//parsedExampleDataSet.setname(new String(ch, start, length));
+		}
+    
+		else if(this.in_photourl)
+		{ parsedExampleDataSet.setfileurl(new String(ch, start, length));
+    }
+}
 }
