@@ -90,11 +90,11 @@ public class ExampleHandler extends DefaultHandler{
 		else if(this.in_name)
 		{ parsedExampleDataSet.setname(new String(ch, start, length));
     }
-		else if(this.in_type)
+		/*else if(this.in_type)
 		{   
 			//parsedExampleDataSet.setname(new String(ch, start, length));
 		}
-    
+    */
 		else if(this.in_photourl)
 		{ parsedExampleDataSet.setfileurl(new String(ch, start, length));
     }
