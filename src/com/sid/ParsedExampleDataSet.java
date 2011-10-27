@@ -137,7 +137,7 @@ public class ParsedExampleDataSet implements  List<ParsedExampleDataSet> {
 	}
 	
 	public String toString(){
-		return "ExtractedString = " + this.name + " Description " + this.description
+		return "Name = " + this.name + " Description " + this.description
 				+ "FileURL = " + this.fileurl;
 	}
 }
