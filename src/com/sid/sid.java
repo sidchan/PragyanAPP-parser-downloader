@@ -61,7 +61,7 @@ public class sid extends Activity {
              List<ParsedExampleDataSet> parsedExampleDataSet = 
 					myExampleHandler.getParsedData();
            //  FileURL= (parsedExampleDataSet).getfileurl();
-            /* Iterator j;
+             Iterator j;
              j = parsedExampleDataSet.iterator();
              ParsedExampleDataSet dataItem;
              while(j.hasNext()){
@@ -70,11 +70,11 @@ public class sid extends Activity {
                   tv.append("\n" + dataItem.getname());
                   tv.append("\n" + dataItem.gettype());
                   tv.append("\n" + dataItem.getdescription());
-                  this.FileName = dataItem.getfileurl() + ".jpg";
-                  this.FileURL = dataItem.getfileurl();
+                  FileName = dataItem.getfileurl() + ".jpg";
+                 FileURL = dataItem.getfileurl();
                   startDownload();
-                  }*/
-             tv.setText(parsedExampleDataSet.toString());
+                  }
+           //  tv.setText(parsedExampleDataSet.toString());
 
              
                 
@@ -120,6 +120,7 @@ public class sid extends Activity {
                  f.close();
              } catch (Exception e) {
                  Log.d("Downloader", e.getMessage());
+                 tv.setText("Error is a bitch ");
              }
 
              return null;
