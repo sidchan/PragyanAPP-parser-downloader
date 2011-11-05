@@ -181,12 +181,12 @@ public class sid extends Activity {
            File root = Environment.getExternalStorageDirectory();
            File imgFile = new File(root + "/images/"+FileName);
            //File imgFile = new File(root + "/download/", FileName);
-           if(imgFile.exists()){
+          if(imgFile.exists()){
 
-               Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+             /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
               
-               myImage.setImageBitmap(myBitmap);
+               myImage.setImageBitmap(myBitmap);*/
 
            
            tv.setText("Done downloading"+root);}
