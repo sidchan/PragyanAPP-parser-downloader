@@ -52,14 +52,14 @@ public class ParsedExampleDataSet  {
 	
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("Employee Details - ");
+		sb.append("Event ");
 		sb.append("Name:" + getname());
-		sb.append(", ");
+		sb.append("Type ");
 		sb.append("Type:" + gettype());
 		sb.append(", ");
-		sb.append("Id:" + getfileurl());
+		sb.append("Url" + getfileurl());
 		sb.append(", ");
-		sb.append("Age:" + getdescription());
+		sb.append("Description" + getdescription());
 		sb.append(".");
 		
 		return sb.toString();

@@ -77,7 +77,7 @@ public class sid extends Activity {
              Iterator j;
              j = DataSet.iterator();
              while(j.hasNext())
-              {tv.setText(j.next().toString());}
+              {tv.append(j.next().toString());}
             /* while(j.hasNext()){
 
                   dataItem = (DataSet) j.next();

@@ -17,8 +17,8 @@ public class ExampleHandler extends DefaultHandler{
 	private boolean in_description=false;
 	String tempval;
 	public List list = new ArrayList() ;
-	private ParsedExampleDataSet parsedExampleDataSet = new ParsedExampleDataSet();
-
+	 ParsedExampleDataSet parsedExampleDataSet;
+	
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
@@ -52,6 +52,8 @@ public class ExampleHandler extends DefaultHandler{
 		}
 		else if (localName.equals("type")) {
 			this.in_type = true;
+		 parsedExampleDataSet = new ParsedExampleDataSet();
+
 			String attrValue = atts.getValue("name");
 			//int i = Integer.parseInt(attrValue);
 			parsedExampleDataSet.settype(attrValue);
@@ -73,7 +75,7 @@ public class ExampleHandler extends DefaultHandler{
 			throws SAXException {
 		 if (localName.equals("pragyan")) {
 				this.in_pragyan = false;
-				//parsedExampleDataSet.setList(list);
+				parsedExampleDataSet.setList(list);
 			}
 		else if (localName.equals("type")) {
 			this.in_type = false;
