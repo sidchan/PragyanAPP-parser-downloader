@@ -12,7 +12,7 @@ public class ParsedExampleDataSet implements  List<ParsedExampleDataSet> {
 	private String fileurl = null;
 	private String description = null;
 	private String type = null;
-
+	 List<ParsedExampleDataSet> list;
 	public String getname() {
 		return name;
 	}
@@ -38,10 +38,16 @@ public class ParsedExampleDataSet implements  List<ParsedExampleDataSet> {
 	public void setfileurl(String fileurl) {
 		this.fileurl = fileurl;
 	}
-	/*public ParsedExampleDataSet getpeds(){
-		return parsedExampleSetData ;
+	public void setList(List<ParsedExampleDataSet> list) {
+		this.list = list;
 	}
-	*/
+
+	public  List<ParsedExampleDataSet> getParsedData(){
+		
+		return list;
+		
+	}
+	
 	public boolean add(ParsedExampleDataSet object) {
 		// TODO Auto-generated method stub
 		return false;
@@ -57,6 +63,7 @@ public class ParsedExampleDataSet implements  List<ParsedExampleDataSet> {
 	public boolean addAll(int arg0,
 			Collection<? extends ParsedExampleDataSet> arg1) {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 	public void clear() {

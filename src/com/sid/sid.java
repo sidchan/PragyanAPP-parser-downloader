@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
@@ -16,27 +17,37 @@ import org.xml.sax.XMLReader;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class sid extends Activity {
     /** Called when the activity is first created. */
 	 public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 	    private ProgressDialog mProgressDialog;
-	public String FileName = "";
+	    ImageView myImage;
+	    public String Fn;
+	    public String Url;
+	    public String FileName = "";
     public String FileURL = "";
     TextView tv;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.main);
+       // setContentView(R.layout.main);
         /* Create a new TextView to display the parsingresult later. */
         tv = new TextView(this);
-        tv.setText("This is the parsing program...");
+       tv.setText("This is the parsing program...");
 
+      //  myImage = (ImageView) findViewById(R.id.imageView1);
+       //  myImage.findViewById(R.drawable.icon);
+       //  File root = Environment.getExternalStorageDirectory();
+         
 
         try {
              /* Create a URL we want to load some xml-data from. */
@@ -59,11 +70,10 @@ public class sid extends Activity {
 
              /* Our ExampleHandler now provides the parsed data to us. */
             
-             List<ParsedExampleDataSet> parsedExampleDataSet = 
-					myExampleHandler.getParsedData();
+             List<ParsedExampleDataSet> parsedExampleDataSet = myExampleHandler.getParsedData();
              ParsedExampleDataSet dataItem ;
            //  FileURL= (parsedExampleDataSet).getfileurl();
-            /* Iterator j;
+             Iterator j;
              j = parsedExampleDataSet.iterator();
              
              while(j.hasNext()){
@@ -71,12 +81,14 @@ public class sid extends Activity {
                   dataItem = (ParsedExampleDataSet) j.next();
                   tv.append("\n" + dataItem.getname());
                   tv.append("\n" + dataItem.gettype());
-                  tv.append("\n" + dataItem.getdescription());*/
-                  FileName = "http://www.pragyan.org/11/cms/uploads/iconman/0000000702_innovation.png";
-                 FileURL = "http://www.pragyan.org/11/cms/uploads/iconman/0000000702_innovation.png";
-                  startDownload();
-               //   }
-           //  tv.setText(parsedExampleDataSet.toString());
+                  tv.append("\n" + dataItem.getdescription());
+                // FileName = "innovation.png";
+                // = "http://www.pragyan.org/11/cms/uploads/iconman/0000000702_innovation.png";
+                  Fn=dataItem.getname()+".jpg";
+                  Url=dataItem.getfileurl();
+                // startDownload();
+                  }
+        //     tv.setText(parsedExampleDataSet.toString());
 
              
                 
@@ -90,7 +102,7 @@ public class sid extends Activity {
         this.setContentView(tv);
    }
     private void startDownload(){
-        new DownloadFileAsync().execute(FileURL);
+        new DownloadFileAsync().execute(Fn,Url);
     }
 
     @Override
@@ -125,16 +137,16 @@ public class sid extends Activity {
 
             try {
                 File root = Environment.getExternalStorageDirectory();
-                URL u = new URL(FileURL);
+                URL u = new URL(aurl[1]);
                 HttpURLConnection c = (HttpURLConnection) u.openConnection();
                 c.setRequestMethod("GET");
                 c.setDoOutput(true);
                 c.connect();
 
                 int lenghtOfFile = c.getContentLength();
-
-                FileOutputStream f = new FileOutputStream(new File(root + "/download/", FileName));
-
+                new File(root + "/images/").mkdirs();
+              //  FileOutputStream f = new FileOutputStream(new File(root + "/download/", FileName));
+                FileOutputStream f = new FileOutputStream(new File(root + "/images/",aurl[0]));
                 InputStream in = c.getInputStream();
 
                 byte[] buffer = new byte[1024];
@@ -164,7 +176,21 @@ public class sid extends Activity {
        @Override
        protected void onPostExecute(String unused) {
            dismissDialog(DIALOG_DOWNLOAD_PROGRESS);
-           tv.setText("MotherFucker");
+           File root = Environment.getExternalStorageDirectory();
+           File imgFile = new File(root + "/images/"+FileName);
+           //File imgFile = new File(root + "/download/", FileName);
+           if(imgFile.exists()){
+
+               Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+              
+               myImage.setImageBitmap(myBitmap);
+
+           
+           tv.setText("Done downloading"+root);}
+           else
+           {tv.setText("File doesnt exist");}
+          
        }
 
     }

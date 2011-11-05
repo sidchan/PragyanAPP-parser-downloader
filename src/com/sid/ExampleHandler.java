@@ -1,5 +1,7 @@
 package com.sid;
 
+import java.util.List;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -12,7 +14,7 @@ public class ExampleHandler extends DefaultHandler{
 	private boolean in_name = false;
 	private boolean in_photourl = false;
 	private boolean in_description=false;
-	
+	public List<ParsedExampleDataSet> list ;
 	private ParsedExampleDataSet parsedExampleDataSet = new ParsedExampleDataSet();
 
 	// ===========================================================
@@ -67,10 +69,12 @@ public class ExampleHandler extends DefaultHandler{
 	public void endElement(String namespaceURI, String localName, String qName)
 			throws SAXException {
 		 if (localName.equals("pragyan")) {
-				this.in_pragyan = true;
+				this.in_pragyan = false;
+				parsedExampleDataSet.setList(list);
 			}
 		else if (localName.equals("type")) {
 			this.in_type = false;
+			list.add(parsedExampleDataSet);
 		}else if (localName.equals("name")) {
 			this.in_name = false;
 		}else if (localName.equals("imageurl")) {
