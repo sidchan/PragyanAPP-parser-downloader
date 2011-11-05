@@ -72,28 +72,28 @@ public class sid extends Activity {
             //ParsedExampleDataSet s=new ParsedExampleDataSet() ;
              List DataSet = myExampleHandler.getData();
            //  tv.setText(DataSet.toString());
-            // DataSet dataItem ;
+             ParsedExampleDataSet dataItem ;
            //  FileURL= (parsedExampleDataSet).getfileurl();
              Iterator j;
              j = DataSet.iterator();
              while(j.hasNext())
-              {tv.append(j.next().toString());}
-            /* while(j.hasNext()){
+              {//tv.append(j.next().toString());}
+             while(j.hasNext()){
 
-                  dataItem = (DataSet) j.next();
-                  tv.append("\n" + dataItem.getname());
+                  dataItem = (ParsedExampleDataSet) j.next();
+                 /* tv.append("\n" + dataItem.getname());
                   tv.append("\n" + dataItem.gettype());
-                  tv.append("\n" + dataItem.getdescription());
+                  tv.append("\n" + dataItem.getdescription());*/
                 // FileName = "innovation.png";
                 // = "http://www.pragyan.org/11/cms/uploads/iconman/0000000702_innovation.png";
-                //  Fn=dataItem.getname()+".jpg";
-                //  Url=dataItem.getfileurl();
-                // startDownload();
-                  }*/
+                  Fn=dataItem.getname()+".jpg";
+                  Url=dataItem.getfileurl();
+                 startDownload();
+                  }
         //     tv.setText(DataSet.toString());
 
              
-                
+              }       
 
         } catch (Exception e) {
              /* Display any Error to the GUI. */
