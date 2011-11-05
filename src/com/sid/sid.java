@@ -69,26 +69,28 @@ public class sid extends Activity {
              /* Parsing has finished. */
 
              /* Our ExampleHandler now provides the parsed data to us. */
-            
-             List<ParsedExampleDataSet> parsedExampleDataSet = myExampleHandler.getParsedData();
-             ParsedExampleDataSet dataItem ;
+            //ParsedExampleDataSet s=new ParsedExampleDataSet() ;
+             List DataSet = myExampleHandler.getData();
+           //  tv.setText(DataSet.toString());
+            // DataSet dataItem ;
            //  FileURL= (parsedExampleDataSet).getfileurl();
              Iterator j;
-             j = parsedExampleDataSet.iterator();
-             
-             while(j.hasNext()){
+             j = DataSet.iterator();
+             while(j.hasNext())
+              {tv.setText(j.next().toString());}
+            /* while(j.hasNext()){
 
-                  dataItem = (ParsedExampleDataSet) j.next();
+                  dataItem = (DataSet) j.next();
                   tv.append("\n" + dataItem.getname());
                   tv.append("\n" + dataItem.gettype());
                   tv.append("\n" + dataItem.getdescription());
                 // FileName = "innovation.png";
                 // = "http://www.pragyan.org/11/cms/uploads/iconman/0000000702_innovation.png";
-                  Fn=dataItem.getname()+".jpg";
-                  Url=dataItem.getfileurl();
+                //  Fn=dataItem.getname()+".jpg";
+                //  Url=dataItem.getfileurl();
                 // startDownload();
-                  }
-        //     tv.setText(parsedExampleDataSet.toString());
+                  }*/
+        //     tv.setText(DataSet.toString());
 
              
                 

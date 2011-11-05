@@ -1,5 +1,6 @@
 package com.sid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.xml.sax.Attributes;
@@ -14,7 +15,8 @@ public class ExampleHandler extends DefaultHandler{
 	private boolean in_name = false;
 	private boolean in_photourl = false;
 	private boolean in_description=false;
-	public List<ParsedExampleDataSet> list ;
+	String tempval;
+	public List list = new ArrayList() ;
 	private ParsedExampleDataSet parsedExampleDataSet = new ParsedExampleDataSet();
 
 	// ===========================================================
@@ -50,6 +52,9 @@ public class ExampleHandler extends DefaultHandler{
 		}
 		else if (localName.equals("type")) {
 			this.in_type = true;
+			String attrValue = atts.getValue("name");
+			//int i = Integer.parseInt(attrValue);
+			parsedExampleDataSet.settype(attrValue);
 		}else if (localName.equals("name")) {
 			this.in_name = true;
 		}else if (localName.equals("imageurl")) {
@@ -57,9 +62,7 @@ public class ExampleHandler extends DefaultHandler{
 		}else if (localName.equals("des")) {
 			this.in_description = true;
 			// Extract an Attribute
-		//	String attrValue = atts.getValue("name");
-			//int i = Integer.parseInt(attrValue);
-		//	parsedExampleDataSet.setname(attrValue);
+		
 		}
 	}
 	
@@ -70,17 +73,21 @@ public class ExampleHandler extends DefaultHandler{
 			throws SAXException {
 		 if (localName.equals("pragyan")) {
 				this.in_pragyan = false;
-				parsedExampleDataSet.setList(list);
+				//parsedExampleDataSet.setList(list);
 			}
 		else if (localName.equals("type")) {
 			this.in_type = false;
+			
 			list.add(parsedExampleDataSet);
 		}else if (localName.equals("name")) {
 			this.in_name = false;
+			parsedExampleDataSet.setname(tempval);
 		}else if (localName.equals("imageurl")) {
 			this.in_photourl = false;
+			parsedExampleDataSet.setfileurl(tempval);
 		}else if (localName.equals("des")) {
 			this.in_description = false;
+			parsedExampleDataSet.setdescription(tempval);
 		}
 	}
 	
@@ -88,19 +95,13 @@ public class ExampleHandler extends DefaultHandler{
 	 * <tag>characters</tag> */
 	@Override
     public void characters(char ch[], int start, int length) {
-		if(this.in_description){
-    		parsedExampleDataSet.setdescription(new String(ch, start, length));
-	    	}
-		else if(this.in_name)
-		{ parsedExampleDataSet.setname(new String(ch, start, length));
-    }
-		/*else if(this.in_type)
-		{   
-			//parsedExampleDataSet.setname(new String(ch, start, length));
-		}
-    */
-		else if(this.in_photourl)
-		{ parsedExampleDataSet.setfileurl(new String(ch, start, length));
-    }
+		 tempval=new String(ch, start, length);
+	    	
 }
+  public  List getData(){
+		
+		return list;
+		
+	}
+  
 }
